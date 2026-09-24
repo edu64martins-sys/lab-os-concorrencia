@@ -1,1 +1,5 @@
-# lab-os-concorrencia
+Resolução das Questões 
+
+1. Troca de Contexto e Atomicidade: A instrução temp = temp + 1 não é atômica porque o processador precisa dividi-la em etapas menores: ler o valor atual da memória, realizar o incremento na CPU e escrever o resultado atualizado de volta. Como o sistema operacional gerencia as threads de forma preemptiva, uma troca de contexto pode ocorrer exatamente no meio dessas etapas. Quando isso acontece, duas ou mais threads podem ler o mesmo valor inicial antes que qualquer uma consiga salvar o incremento, fazendo com que uma sobrescreva o trabalho da outra e causando a inconsistência nos dados.
+
+2. Custo do lock: O código com a implementação do Lock apresenta um tempo de execução maior do que a versão insegura. Esse overhead ocorre porque a primitiva de sincronização força o sistema operacional a intervir constantemente para bloquear e liberar a seção crítica. Esse processo envolve chamadas de sistema (syscalls) e trocas de contexto extras para suspender (colocar para dormir) as threads que estão aguardando liberação e acordá-las depois. Além disso, o bloco de código protegido é executado de maneira estritamente sequencial, sacrificando o paralelismo.
